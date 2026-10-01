@@ -1,3 +1,4 @@
+import path from "node:path";
 import express, { type Request, type Response, type NextFunction } from "express";
 import {
   PRODUCTS,
@@ -5,6 +6,7 @@ import {
   type OrderItem,
   nextOrderId,
   priceOf,
+  getProduct,
   saveOrder,
   getOrder,
   ordersForUser,
@@ -12,6 +14,9 @@ import {
 
 const app = express();
 app.use(express.json());
+
+// Product photos, served as static files (see public/images).
+app.use("/images", express.static(path.join(process.cwd(), "public", "images")));
 
 // A stand-in for real auth: the caller identifies itself with an `x-user-id` header.
 // Every route below runs as that user.
@@ -30,6 +35,14 @@ app.get("/health", (_req, res) => {
 
 app.get("/products", (_req, res) => {
   res.json({ products: PRODUCTS });
+});
+
+app.get("/products/:id", (req, res) => {
+  const product = getProduct(req.params.id);
+  if (!product) {
+    return res.status(404).json({ error: "product not found" });
+  }
+  res.json({ product });
 });
 
 // Create an order for the current user.

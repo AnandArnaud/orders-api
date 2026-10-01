@@ -5,6 +5,8 @@ export interface Product {
   id: string;
   name: string;
   priceCents: number;
+  /** Path under the service's own static files, e.g. GET /images/tee.png. Square, 1200 px. */
+  image: string;
 }
 
 export interface OrderItem {
@@ -22,10 +24,10 @@ export interface Order {
 }
 
 export const PRODUCTS: Product[] = [
-  { id: "tee", name: "Cloud Tee", priceCents: 2800 },
-  { id: "mug", name: "Nimbus Mug", priceCents: 1400 },
-  { id: "cap", name: "Field Cap", priceCents: 2400 },
-  { id: "tote", name: "Canvas Tote", priceCents: 3200 },
+  { id: "tee", name: "Cloud Tee", priceCents: 2800, image: "/images/tee.png" },
+  { id: "mug", name: "Nimbus Mug", priceCents: 1400, image: "/images/mug.png" },
+  { id: "cap", name: "Field Cap", priceCents: 2400, image: "/images/cap.png" },
+  { id: "tote", name: "Field Tote", priceCents: 3200, image: "/images/tote.png" },
 ];
 
 const orders = new Map<string, Order>();
@@ -39,6 +41,10 @@ export function nextOrderId(): string {
 export function priceOf(productId: string): number | null {
   const p = PRODUCTS.find((x) => x.id === productId);
   return p ? p.priceCents : null;
+}
+
+export function getProduct(productId: string): Product | undefined {
+  return PRODUCTS.find((x) => x.id === productId);
 }
 
 export function saveOrder(order: Order): void {
