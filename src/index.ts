@@ -80,7 +80,7 @@ app.post("/orders", requireUser, (req: Request, res: Response) => {
   };
   saveOrder(order);
 
-  // No product analytics wired in yet — the handler just logs the action.
+  // The handler logs the action.
   console.log(`[orders] Order Created id=${order.id} user=${userId} total=${totalCents}`);
 
   res.status(201).json({ order });
@@ -96,7 +96,7 @@ app.post("/orders/:id/confirm", requireUser, (req: Request, res: Response) => {
   order.status = "confirmed";
   saveOrder(order);
 
-  // No product analytics wired in yet — the handler just logs the action.
+  // The handler logs the action.
   console.log(`[orders] Order Confirmed id=${order.id} user=${userId}`);
 
   res.json({ order });

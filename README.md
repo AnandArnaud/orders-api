@@ -6,8 +6,7 @@ restart.
 
 **Stack:** Express 4 + TypeScript (Node)
 
-It is realistic but intentionally small, and ships with **no product analytics wired in** — the
-API route handlers just log to the console today.
+It is intentionally small. The handlers log to the console.
 
 ## Layout
 
