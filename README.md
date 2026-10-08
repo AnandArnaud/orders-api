@@ -14,7 +14,7 @@ It is intentionally small. The handlers log to the console.
 - `public/images/` product photos (square, 1200 px), served at `GET /images/<id>.png`
 - `brand/` brand guidelines, colours and the logo
 
-## Events worth tracking
+## Key events
 
 - **Order Created** — `POST /orders` (with an `x-user-id` header)
 - **Order Confirmed** — `POST /orders/:id/confirm`
